@@ -12,4 +12,9 @@ app.mount("/static", StaticFiles(directory="frontend"), name="static")
 templates = Jinja2Templates(directory="frontend")
 
 # 包含API路由
-app.include_router(translate.router, prefix="/api/v1") 
+app.include_router(translate.router, prefix="/api/v1")
+
+# 更新
+@app.get("/")
+async def root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
